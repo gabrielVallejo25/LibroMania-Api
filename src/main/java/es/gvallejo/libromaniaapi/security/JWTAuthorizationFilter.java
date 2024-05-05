@@ -23,13 +23,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
-
-	private IJWTUtilityService jwtUtilityService;
-
+	
 	@Autowired
-	public JWTAuthorizationFilter(IJWTUtilityService jwtUtilityService) {
-		this.jwtUtilityService = jwtUtilityService;
-	}
+	private IJWTUtilityService jwtUtilityService;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

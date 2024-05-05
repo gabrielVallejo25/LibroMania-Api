@@ -2,7 +2,6 @@ package es.gvallejo.libromaniaapi.security;
 
 import java.util.Collections;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -15,7 +14,6 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
-import es.gvallejo.libromaniaapi.service.IJWTUtilityService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration
@@ -23,13 +21,10 @@ import jakarta.servlet.http.HttpServletRequest;
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-	@Autowired
-	private IJWTUtilityService jwtUtilityService;
-
 	// Aqui se definen las rutas públicas y privadas
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http.addFilterBefore(new JWTAuthorizationFilter(jwtUtilityService), BasicAuthenticationFilter.class)
+		return http.addFilterBefore(new JWTAuthorizationFilter(), BasicAuthenticationFilter.class)
 				.authorizeHttpRequests(
 						authRequest -> authRequest.requestMatchers("/auth/**").permitAll().anyRequest().authenticated())
 				.csrf(csrf -> csrf.disable()).cors(cors -> cors.configurationSource(new CorsConfigurationSource() {
