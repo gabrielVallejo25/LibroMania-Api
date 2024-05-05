@@ -62,3 +62,8 @@ buildNumber.properties
 *.xhtml
 
 # End of https://www.toptal.com/developers/gitignore/api/java,maven,web
+.factorypath
+*.pem
+*.properties
+.settings/
+
